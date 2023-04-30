@@ -1,0 +1,21 @@
+﻿<Properties StartupConfiguration="{A64A6554-8D36-4818-AFFD-AC120F2675B9}|Default">
+  <MonoDevelop.Ide.ItemProperties.pulumi-protect PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="EmptyClass.cs">
+    <Files>
+      <File FileName="EmptyClass.cs" Line="18" Column="2" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="pulumi-protect" expanded="True" selected="True" />
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+</Properties>

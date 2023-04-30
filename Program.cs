@@ -1,7 +1,5 @@
 ﻿using System.Diagnostics;
-using pulumi_protect;
 using pulumi_protect.serviceapi;
-using Pulumi.Automation;
 
 // remove first arg from command line args
 var origArgs = Environment.GetCommandLineArgs();
@@ -16,8 +14,20 @@ if (command == "destroy")
     
     // fetch all stacks from the back end service (pulumi service for now)
     var apiClient = new PulumiServiceApiClient(pulumiOrg);
-    var allStacks = await apiClient.GetAllStacksAsync();
+    if (apiClient.ValidatePulumiCliAuthentication() == false)
+    {
+        // exit 1
+        Environment.Exit(1);
+    }
     
+    var allStacks = await apiClient.GetAllStacksAsync();
+    foreach (var theStack in allStacks.Stacks)
+    {
+        Console.WriteLine($"Destroying {theStack.OrgName}/{theStack.ProjectName}/{theStack.StackName}");
+    }
+    
+    // exit program
+    Environment.Exit(0);
 }
 
 var process = new Process

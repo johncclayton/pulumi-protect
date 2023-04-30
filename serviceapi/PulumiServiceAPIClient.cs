@@ -1,4 +1,6 @@
-﻿using Flurl.Http;
+﻿using System.Reflection.Metadata.Ecma335;
+using System.Runtime.CompilerServices;
+using Flurl.Http;
 
 namespace pulumi_protect.serviceapi;
 
@@ -12,7 +14,9 @@ public class PulumiServiceApiClient
     {
         RootPulumiApi = "https://api.pulumi.com";
         PulumiOrganization = org;
-        PulumiAccessToken = accessToken ?? Environment.GetEnvironmentVariable("PULUMI_ACCESS_TOKEN");
+        
+        if(PulumiAccessToken == null || accessToken != null)
+            PulumiAccessToken = accessToken ?? Environment.GetEnvironmentVariable("PULUMI_ACCESS_TOKEN");
     }
 
     public async Task<StackListResponseData> GetAllStacksAsync()
@@ -64,5 +68,38 @@ public class PulumiServiceApiClient
             .WithHeader("Authorization", $"token {PulumiAccessToken}")
             .WithHeader("Accept", "application/vnd.pulumi+8")
             .WithHeader("Content-Type", "application/json");
+    }
+
+    public bool ValidatePulumiCliAuthentication()
+    {
+        // is the pulumi access token set?
+        var pulumiAccessToken = Environment.GetEnvironmentVariable("PULUMI_ACCESS_TOKEN");
+        if (pulumiAccessToken != null)
+        {
+            PulumiAccessToken = pulumiAccessToken;
+            return PulumiAccessToken != null;
+        }
+
+        // credentials.json is in the users home directory
+        var credentialsFile = Path.Combine(
+            Environment.GetFolderPath(Environment.SpecialFolder.UserProfile),
+            ".pulumi",
+            "credentials.json");
+        
+        if (!File.Exists(credentialsFile))
+        {
+            throw new Exception("Pulumi CLI is not authenticated. Please run `pulumi login`.");
+        }
+        
+        // read the file contents, it's JSON
+        var credentialsJson = File.ReadAllText(credentialsFile);
+        
+        // parse the JSON
+        var credentials = PulumiCredentials.FromJson(credentialsJson);
+        
+        // well, it didn't explode - that's generally a good sign.
+        PulumiAccessToken = credentials.AccessTokens?.HttpsApiPulumiCom;
+
+        return PulumiAccessToken != null;
     }
 }
