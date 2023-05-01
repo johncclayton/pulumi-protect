@@ -8,12 +8,12 @@
         <Nullable>enable</Nullable>
 
         <PackAsTool>true</PackAsTool>
-        <ToolCommandName>pul</ToolCommandName>
+        <ToolCommandName>pprot</ToolCommandName>
         <PackageOutputPath>./nupkg</PackageOutputPath>
         <AssemblyName>pprot</AssemblyName>
         <Authors>John Clayton</Authors>
         <Company>Effective Flow GmbH</Company>
-        <Product>pul</Product>
+        <Product>pprot</Product>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     </PropertyGroup>
     
@@ -21,6 +21,7 @@
       <PackageReference Include="Flurl.Http" Version="3.2.4" />
       <PackageReference Include="Pulumi.Automation" Version="3.54.1" />
       <PackageReference Include="Spectre.Console.Cli" Version="0.46.0" />
+      <PackageReference Include="System.Reactive" Version="5.0.0" />
     </ItemGroup>
 
 </Project>

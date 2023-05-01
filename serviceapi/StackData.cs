@@ -6,4 +6,7 @@ public record StackData(
     string StackName,
     DateTime LastUpdateTime,
     int ResourceCount
-);
+)
+{
+    public string FullyQualifiedStackName { get => $"{OrgName}/{ProjectName}/{StackName}"; }
+}

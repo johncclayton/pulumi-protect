@@ -6,6 +6,7 @@
 //    var welcome = PulumiCredentials.FromJson(jsonString);
 
 #nullable enable
+
 using System.Globalization;
 using System.Text.Json;
 using System.Text.Json.Serialization;
@@ -14,7 +15,7 @@ using System.Text.Json.Serialization;
 #pragma warning disable CS8601
 #pragma warning disable CS8603
 
-namespace pprot
+namespace pprot.serviceapi
 {
     public partial class PulumiCredentials
     {
