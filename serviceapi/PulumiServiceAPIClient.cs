@@ -1,8 +1,6 @@
-﻿using System.Reflection.Metadata.Ecma335;
-using System.Runtime.CompilerServices;
-using Flurl.Http;
+﻿using Flurl.Http;
 
-namespace pulumi_protect.serviceapi;
+namespace pprot.serviceapi;
 
 public class PulumiServiceApiClient
 {

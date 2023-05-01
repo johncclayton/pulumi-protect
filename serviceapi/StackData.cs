@@ -1,4 +1,4 @@
-﻿namespace pulumi_protect.serviceapi;
+﻿namespace pprot.serviceapi;
 
 public record StackData(
     string OrgName,

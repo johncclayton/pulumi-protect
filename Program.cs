@@ -1,5 +1,5 @@
 ﻿using System.Diagnostics;
-using pulumi_protect.serviceapi;
+using pprot.serviceapi;
 
 // remove first arg from command line args
 var origArgs = Environment.GetCommandLineArgs();
@@ -25,6 +25,19 @@ if (command == "destroy")
     {
         Console.WriteLine($"Destroying {theStack.OrgName}/{theStack.ProjectName}/{theStack.StackName}");
     }
+    
+    // how do we know which stacks to look for in the graph?  the user will have a
+    // selected stack or they'll specify the -s argument.
+    
+    // primitive: find the -s argument
+    string? stackName = null;
+    for (int index = 0; index < argsList.Count - 1; ++index)
+    {
+        if(args[index] == "-s" || args[index] == "--stack")
+            stackName = args[index + 1];
+    }
+
+    Console.WriteLine($"I think the current stack is: {stackName}");
     
     // exit program
     Environment.Exit(0);

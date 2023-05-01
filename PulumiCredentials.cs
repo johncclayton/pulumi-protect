@@ -6,18 +6,16 @@
 //    var welcome = PulumiCredentials.FromJson(jsonString);
 
 #nullable enable
+using System.Globalization;
+using System.Text.Json;
+using System.Text.Json.Serialization;
+
 #pragma warning disable CS8618
 #pragma warning disable CS8601
 #pragma warning disable CS8603
 
-namespace pulumi_protect
+namespace pprot
 {
-    using System;
-
-    using System.Text.Json;
-    using System.Text.Json.Serialization;
-    using System.Globalization;
-
     public partial class PulumiCredentials
     {
         [JsonPropertyName("current")]
@@ -59,12 +57,12 @@ namespace pulumi_protect
 
     public partial class PulumiCredentials
     {
-        public static PulumiCredentials FromJson(string json) => JsonSerializer.Deserialize<PulumiCredentials>(json, pulumi_protect.Converter.Settings);
+        public static PulumiCredentials FromJson(string json) => JsonSerializer.Deserialize<PulumiCredentials>(json, Converter.Settings);
     }
 
     public static class Serialize
     {
-        public static string ToJson(this PulumiCredentials self) => JsonSerializer.Serialize(self, pulumi_protect.Converter.Settings);
+        public static string ToJson(this PulumiCredentials self) => JsonSerializer.Serialize(self, Converter.Settings);
     }
 
     internal static class Converter
